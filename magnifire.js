@@ -59,6 +59,7 @@ function nrzMagnify(image_, zoomLevel = 4, magnifierSize = 250, borderRadius = 0
   }
 
   function startMagnifier(element) {
+    console.log("Magnifier started")
     const image = element.querySelector('svg image');
     if (image) {
       const imagePath = image.getAttribute('xlink:href') || image.getAttribute('href');
