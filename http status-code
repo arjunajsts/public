@@ -1,0 +1,94 @@
+1. Group by Categories
+You can break the status codes down by category, and then associate each group with an easy-to-remember phrase.
+
+1xx - Informational Responses: "I'm still thinking!"
+These are not commonly used in APIs, but here's how you can remember them:
+
+100 Continue: The request is "continuing" — just keep going.
+101 Switching Protocols: The server is switching protocols (think of it as changing paths or directions).
+Mnemonic: "I'm still thinking about it." (Informational)
+
+2xx - Success: "Everything's OK!"
+These are the most common and easy to remember. Every successful response falls into this group.
+
+200 OK: The classic success code. Everything's fine.
+201 Created: Something was successfully created (e.g., a new resource).
+204 No Content: The request was successful, but there's nothing to return (like a successful DELETE request).
+Mnemonic: "Success! OK, created, no content." — Think about completing a task successfully.
+
+3xx - Redirection: "Redirecting you!"
+These codes indicate you need to go somewhere else (or that the resource is moved).
+
+301 Moved Permanently: Permanent move to a new location.
+302 Found: Temporary redirect. Found a new location but don't change anything permanently.
+304 Not Modified: No changes since the last request. Use cached version.
+Mnemonic: "Redirect! Move permanently or temporarily, or just use the old version."
+
+4xx - Client Errors: "Oops, that's your fault!"
+These are common errors made by the client (you or the user).
+
+400 Bad Request: Your request was bad, invalid, or malformed.
+401 Unauthorized: You need to log in or provide credentials.
+403 Forbidden: You don’t have permission, even though you're logged in.
+404 Not Found: The resource doesn’t exist.
+405 Method Not Allowed: Wrong HTTP method used (e.g., POST instead of GET).
+Mnemonic: "Oops, it's your fault! Bad request, not authorized, forbidden, not found, or wrong method."
+The key here is "Oops" — think of mistakes you can make in a request.
+
+5xx - Server Errors: "Oops, the server’s fault!"
+These are errors that happen on the server side.
+
+500 Internal Server Error: Something went wrong on the server.
+502 Bad Gateway: The server didn’t get a valid response from another server (think of it as a bad relay).
+503 Service Unavailable: The server is down for maintenance or temporarily unavailable.
+504 Gateway Timeout: A timeout occurred when trying to communicate with an upstream server.
+Mnemonic: "Oops, the server's fault! Internal error, bad gateway, service unavailable, or timeout."
+Think of "Oops" again, but this time, it's not your fault — it's the server’s problem.
+
+2. Acronyms for Quick Reference
+Here’s a quick way to recall the meanings for common status codes:
+
+2xx (Success): "OK" — Everything is fine.
+3xx (Redirection): "Redirect" — Go somewhere else.
+4xx (Client Error): "Oops!" — You made a mistake.
+5xx (Server Error): "Oops, Server!" — Server made a mistake.
+3. Visualization (Picture It)
+Try associating each status code with a simple image:
+
+200 OK: Picture a green checkmark (success).
+301 Moved Permanently: Picture a map with a new destination.
+400 Bad Request: Picture a red "X" or a stop sign.
+404 Not Found: Picture a magnifying glass or a missing person icon.
+500 Internal Server Error: Picture a broken server or a crashed computer.
+4. Story Technique
+You can create a short story where each of the codes plays a role:
+
+"Imagine you're trying to enter a building (the server):
+
+200 OK: The door is open; you enter successfully.
+301 Moved Permanently: The building moved to a new location; you follow the signs.
+400 Bad Request: You try to enter the building with the wrong key; the door won't open.
+401 Unauthorized: You’re not allowed to enter without ID, so you get denied.
+404 Not Found: There’s no building at the address, so you can’t find it.
+500 Internal Server Error: The building’s elevator is broken and the whole system crashes."
+5. Using Repetition and Practice
+Use the Codes Frequently: Every time you handle an HTTP request/response, mentally note the status code and its meaning.
+Practice with Real-World Examples: Try using these codes in real development scenarios. For instance, when you're working with an API, practice responding with different status codes for different cases.
+Flashcards: Create flashcards for each status code with its meaning, and test yourself regularly.
+Recap of the Mnemonics:
+1xx: "I'm still thinking!"
+2xx: "Everything's OK!"
+3xx: "Redirecting you!"
+4xx: "Oops, that's your fault!"
+5xx: "Oops, the server’s fault!"
+Bonus: Common Status Codes to Focus On
+Start by mastering the most common ones:
+
+200 OK: Everything worked.
+201 Created: Something was created.
+400 Bad Request: Something’s wrong with your request.
+401 Unauthorized: You need to log in.
+403 Forbidden: You don't have permission.
+404 Not Found: The resource doesn’t exist.
+500 Internal Server Error: The server is broken.
+503 Service Unavailable: The server is temporarily down.
