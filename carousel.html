@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SharePoint Image Carousel</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+      .carousel-container {
+        position: relative;
+        width: 100%;
+        border-radius: 10px;
+        overflow: hidden;
+      }
+      .carousel-wrapper {
+        display: flex;
+        overflow: hidden;
+        width: 100%;
+      }
+      .carousel {
+        display: flex;
+        transition: transform 0.5s ease-in-out;
+        width: 100%;
+      }
+      .carousel-item {
+        position: relative;
+        width: 100%;
+        flex-shrink: 0;
+      }
+      .carousel img {
+        width: 100%;
+        height: 400px;
+        object-fit: cover;
+      }
+      .carousel-caption {
+        max-width: 400px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        position: absolute;
+        top: 15%;
+        left: 10%;
+        background: rgba(0, 0, 0, 0.2);
+        color: white;
+        padding: 10px 10px;
+        border-radius: 5px;
+        text-align: center;
+      }
+      .carousel-caption a {
+        color: #ffd700;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .carousel-caption a:hover {
+        text-decoration: underline;
+      }
+      .prev,
+      .next {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%, -50%);
+        background: transparent;
+        color: white;
+        /* padding: 15px; */
+        cursor: pointer;
+        border: none;
+        font-size: 25px;
+        /* border-radius: 50%; */
+        transition: 0.3s;
+      }
+      .prev:hover,
+      .next:hover {
+        scale: 1.2;
+      }
+      .prev:active,
+      .next:active {
+        transform: translateY(2px);
+      }
+
+      .prev {
+        left: 15px;
+      }
+      .next {
+        right: 15px;
+      }
+      .indicators {
+        position: absolute;
+        text-align: center;
+        left: 50%;
+        bottom: 0;
+        transform: translate(-50%, -50%);
+      }
+      .indicator {
+        display: inline-block;
+        width: 12px;
+        height: 12px;
+        margin: 5px;
+        background: gray;
+        border-radius: 50%;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .indicator:hover,
+      .active {
+        background: black;
+        transform: scale(1.2);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="carousel-container">
+      <div class="carousel-wrapper">
+        <div class="carousel" id="carousel"></div>
+      </div>
+      <button class="prev" onclick="prevSlide()">&#10094;</button>
+      <button class="next" onclick="nextSlide()">&#10095;</button>
+      <div class="indicators" id="indicators"></div>
+    </div>
+
+    <script>
+      let images = [
+        {
+          url: "https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w",
+          linkText: "Visit Google",
+          header: "Some random text goes here",
+          link: "https://www.google.com",
+        },
+        {
+          url: "https://fastly.picsum.photos/id/16/2500/1667.jpg?hmac=uAkZwYc5phCRNFTrV_prJ_0rP0EdwJaZ4ctje2bY7aE",
+          linkText: "Visit Bing",
+          header: "Some random text goes here",
+          link: "https://www.bing.com",
+        },
+        {
+          url: "https://fastly.picsum.photos/id/25/5000/3333.jpg?hmac=yCz9LeSs-i72Ru0YvvpsoECnCTxZjzGde805gWrAHkM",
+          linkText: "Visit Yahoo",
+          header: "Some random text goes here",
+          link: "https://www.yahoo.com",
+        },
+      ];
+      let currentIndex = 0;
+      let interval;
+
+      function renderCarousel() {
+        const carousel = document.getElementById("carousel");
+        const indicators = document.getElementById("indicators");
+        carousel.innerHTML = images
+          .map(
+            (img) => `
+                <div class="carousel-item">
+                    <img src="${img.url}" alt="Image">
+                    <div class="carousel-caption">
+                        <h1>${img.header}</h1>
+                        <a href="${img.link}" target="_blank">${img.linkText}</a>
+                    </div>
+                </div>
+            `
+          )
+          .join("");
+        indicators.innerHTML = images
+          .map(
+            (_, i) =>
+              `<span class="indicator" onclick="goToSlide(${i})"></span>`
+          )
+          .join("");
+        updateCarousel();
+        startAutoSlide();
+      }
+
+      function updateCarousel() {
+        const carousel = document.getElementById("carousel");
+        const indicators = document.querySelectorAll(".indicator");
+        carousel.style.transform = `translateX(-${currentIndex * 100}%)`;
+        indicators.forEach((dot, i) =>
+          dot.classList.toggle("active", i === currentIndex)
+        );
+      }
+
+      function prevSlide() {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateCarousel();
+        resetAutoSlide();
+      }
+      function nextSlide() {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateCarousel();
+        resetAutoSlide();
+      }
+      function goToSlide(index) {
+        currentIndex = index;
+        updateCarousel();
+        resetAutoSlide();
+      }
+      function startAutoSlide() {
+        interval = setInterval(nextSlide, 4000);
+      }
+      function resetAutoSlide() {
+        clearInterval(interval);
+        startAutoSlide();
+      }
+
+      renderCarousel();
+    </script>
+  </body>
+</html>
