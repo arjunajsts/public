@@ -1,0 +1,19 @@
+CREATE TABLE ULSubscriptions (
+    Title VARCHAR(255),
+    Description TEXT,
+    NotifyIsEmail BOOLEAN
+);
+
+CREATE TABLE ULSubscribers (
+    Email VARCHAR(255),
+    AAC ENUM('Subscribe', 'Unsubscribe'),
+    CI ENUM('Subscribe', 'Unsubscribe'),
+    DNA ENUM('Subscribe', 'Unsubscribe'),
+    EUGHG ENUM('Subscribe', 'Unsubscribe'),
+    GPH ENUM('Subscribe', 'Unsubscribe'),
+    GT ENUM('Subscribe', 'Unsubscribe'),
+    SUP ENUM('Subscribe', 'Unsubscribe'),
+    SUST ENUM('Subscribe', 'Unsubscribe'),
+    UMA ENUM('Subscribe', 'Unsubscribe'),
+    FOREIGN KEY (Email) REFERENCES ULSubscriptions(Title)
+);
