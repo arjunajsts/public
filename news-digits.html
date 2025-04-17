@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Article Subscription Portal</title>
+    <style>
+      :root {
+        --primary-color: #4f46e5;
+        --primary-hover: #4338ca;
+        --secondary-color: #f3f4f6;
+        --text-color: #1f2937;
+        --light-text: #6b7280;
+        --border-color: #e5e7eb;
+        --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        --transition-speed: 0.3s;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+        color: var(--text-color);
+        background-color: #f9fafb;
+        line-height: 1.5;
+      }
+
+      .app-container {
+        max-width: 1200px;
+        padding: 2rem;
+        /* margin: 0 auto; */
+      }
+
+      header {
+        margin-bottom: 2rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        color: var(--text-color);
+      }
+
+      .tabs {
+        display: flex;
+        gap: 1rem;
+        border-bottom: 1px solid var(--border-color);
+        padding-bottom: 0.5rem;
+      }
+
+      .tab-btn {
+        background: none;
+        border: none;
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 500;
+        color: var(--light-text);
+        cursor: pointer;
+        transition: all var(--transition-speed);
+        border-radius: 0.5rem 0.5rem 0 0;
+      }
+
+      .tab-btn:hover {
+        color: var(--primary-color);
+      }
+
+      .tab-btn.active {
+        color: var(--primary-color);
+        border-bottom: 2px solid var(--primary-color);
+      }
+
+      .tab-content {
+        display: none;
+      }
+
+      .tab-content.active {
+        display: block;
+        animation: fadeIn 0.5s ease;
+      }
+
+      .search-bar {
+        margin-bottom: 1.5rem;
+      }
+
+      .search-bar input {
+        width: 100%;
+        padding: 0.75rem 1rem;
+        border: 1px solid var(--border-color);
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        transition: border-color var(--transition-speed);
+      }
+
+      .search-bar input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      }
+
+      .cards-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 1.5rem;
+      }
+
+      .card {
+        /* background-color: white;
+        border-radius: 0.75rem;
+        box-shadow: var(--card-shadow); */
+        overflow: hidden;
+        transition: transform var(--transition-speed),
+          box-shadow var(--transition-speed);
+        cursor: pointer;
+        position: relative;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+          0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      }
+
+      .card-img {
+        height: 160px;
+        background-color: #e5e7eb;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .card-content {
+        padding: 1.25rem;
+      }
+
+      .card-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-color);
+      }
+
+      .card-date {
+        font-size: 0.875rem;
+        color: var(--light-text);
+        margin-bottom: 0.75rem;
+      }
+
+      .card-description {
+        font-size: 0.875rem;
+        color: var(--light-text);
+        margin-bottom: 1rem;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+
+      .card-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+      }
+
+      .tag {
+        background-color: var(--secondary-color);
+        color: var(--light-text);
+        padding: 0.25rem 0.75rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+
+      .subscribed-badge {
+        position: absolute;
+        top: 0.75rem;
+        right: 0.75rem;
+        background-color: var(--primary-color);
+        color: white;
+        padding: 0.25rem 0.5rem;
+        border-radius: 9999px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        opacity: 0;
+        transform: translateY(-10px);
+        transition: opacity var(--transition-speed),
+          transform var(--transition-speed);
+      }
+
+      .card.subscribed .subscribed-badge {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity var(--transition-speed);
+      }
+
+      .modal.active {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        animation: fadeIn 0.3s forwards;
+      }
+
+      .modal-content {
+        background-color: white;
+        border-radius: 0.75rem;
+        width: 90%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow-y: auto;
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        transform: translateY(20px);
+        opacity: 0;
+        transition: transform var(--transition-speed),
+          opacity var(--transition-speed);
+        position: relative;
+      }
+
+      .modal.active .modal-content {
+        transform: translateY(0);
+        opacity: 1;
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: var(--light-text);
+        transition: color var(--transition-speed);
+      }
+
+      .close-btn:hover {
+        color: var(--text-color);
+      }
+
+      .modal-header {
+        padding: 1.5rem 1.5rem 0.5rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+
+      .modal-body {
+        padding: 1.5rem;
+      }
+
+      .modal-footer {
+        padding: 1rem 1.5rem 1.5rem;
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+      }
+
+      #modal-title {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+      }
+
+      #modal-date {
+        color: var(--light-text);
+        font-size: 0.875rem;
+      }
+
+      #modal-description {
+        margin-bottom: 1.5rem;
+        line-height: 1.6;
+      }
+
+      .tags-container {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+
+      .btn {
+        padding: 0.75rem 1.5rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all var(--transition-speed);
+        border: none;
+        font-size: 0.875rem;
+      }
+
+      .primary-btn {
+        background-color: var(--primary-color);
+        color: white;
+      }
+
+      .primary-btn:hover {
+        background-color: var(--primary-hover);
+      }
+
+      .primary-btn.subscribed {
+        background-color: #ef4444;
+      }
+
+      .primary-btn.subscribed:hover {
+        background-color: #dc2626;
+      }
+
+      .loading {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 2rem;
+        color: var(--light-text);
+      }
+
+      .empty-state {
+        grid-column: 1 / -1;
+        text-align: center;
+        padding: 3rem 1rem;
+        color: var(--light-text);
+      }
+
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          transform: translateY(20px);
+          opacity: 0;
+        }
+        to {
+          transform: translateY(0);
+          opacity: 1;
+        }
+      }
+
+      .card {
+        animation: slideUp 0.5s ease forwards;
+        opacity: 0;
+      }
+
+      /* Staggered animation for cards */
+      .card:nth-child(1) {
+        animation-delay: 0.1s;
+      }
+      .card:nth-child(2) {
+        animation-delay: 0.2s;
+      }
+      .card:nth-child(3) {
+        animation-delay: 0.3s;
+      }
+      .card:nth-child(4) {
+        animation-delay: 0.4s;
+      }
+      .card:nth-child(5) {
+        animation-delay: 0.5s;
+      }
+      .card:nth-child(6) {
+        animation-delay: 0.6s;
+      }
+      .card:nth-child(7) {
+        animation-delay: 0.7s;
+      }
+      .card:nth-child(8) {
+        animation-delay: 0.8s;
+      }
+
+      /* Responsive styles */
+      @media (max-width: 768px) {
+        .app-container {
+          padding: 1rem;
+        }
+
+        .cards-container {
+          grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        }
+
+        .modal-content {
+          width: 95%;
+        }
+      }
+
+      /*  */
+
+      * {
+        font-size: 14px;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      .emnews {
+        background-color: aliceblue;
+        padding: 1rem 0
+      }
+      .emheader {
+        font-size: 25px;
+        font-weight: bold;
+        color: #555353;
+      }
+      .newsInfo {
+        padding: 25px 0 0;
+        font-size: 12px;
+      }
+      .textColorRed {
+        color: red;
+      }
+      .link {
+        color: #4a8297;
+        text-decoration: none;
+        font-weight: 700;
+      }
+      .space {
+        border-bottom: 1px solid lightgrey;
+        margin: 20px 0;
+      }
+      .newsListContainer {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(260px, 100%), 1fr));
+        gap: 15px;
+        /* flex-direction: row;
+      justify-content: space-between;
+      flex-wrap: wrap; */
+      }
+      @keyframes animation1 {
+        0% {
+          transform: scale(0.8);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+      .newsCard {
+        /* margin-top: 15px; */
+        height: 300px;
+        /* width: 250px; */
+        border-radius: 4px;
+        overflow: hidden;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        transition: 0.5s;
+        position: relative;
+        display: flex;
+        animation-name: animation1;
+        animation-duration: 1s;
+        align-items: flex-end;
+      }
+      .newsCard:hover {
+        box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.36);
+      }
+      .newsCardInfo {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+      .newsHeading {
+        white-space: nowrap;
+        width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .newsDescribtion {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 4;
+        line-clamp: 4;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: grey;
+        font-size: 12px;
+        height: 65px;
+        margin-top: 7px;
+      }
+      .newsDetails {
+        text-align: center;
+        padding: 15px;
+        z-index: 1;
+      }
+      .whiteBackground {
+        background-color: #ffffff;
+        border-radius: 50%;
+        height: 225px;
+        width: 500px;
+        position: absolute;
+        bottom: -60px;
+        left: -132px;
+      }
+      .backgroundImg {
+        position: absolute;
+        top: 0;
+        z-index: 0;
+        height: 100%;
+      }
+      .newsCardImg {
+        height: 100%;
+        background-image: url("../assets/industries.jpg");
+      }
+      .actions {
+        padding-top: 10px;
+      }
+      .Whitetext {
+        color: white;
+      }
+      .btn {
+        background: white;
+        border: 1px solid grey;
+        color: black;
+        padding: 8px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .btn:hover {
+        background: skyblue;
+      }
+      .greenButton {
+        background: rgb(47, 159, 47);
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .greenButton:hover {
+        background: green;
+      }
+      .redButton {
+        background: rgb(222, 82, 80);
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 3px;
+        cursor: pointer;
+      }
+      .redButton:hover {
+        background: rgb(255, 4, 0);
+      }
+      .blueButton {
+        background: #0078d4;
+        border: none;
+        color: white;
+        padding: 5px 15px;
+        border-radius: 3px;
+        margin-left: 15px;
+        cursor: pointer;
+      }
+      .blueButton:hover {
+        background: #3374a6;
+      }
+      /* .container {
+        margin: 0 200px;
+      } */
+      @media only screen and (max-width: 800px) {
+        .container {
+          margin: 0 10px;
+        }
+      }
+      /* Animations */
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      .container{
+        padding-left: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="emnews">
+      <header class="emheader container">News digests</header>
+    </section>
+    <div class="newsInfo container">
+      <b class="textColorRed">PLEASE READ :</b
+      ><span class="textColorRed">
+        We have migrated our newsletter subscriptions to a new location. This
+        page is in READ ONLY mode. Please visit our
+        <a class="link" href="./">updated newsletter page</a> to manage your
+        subscriptions.
+      </span>
+      <b class="textColorRed">
+        <small
+          >SUBSCRIPTION CHANGES YOU MAKE ON THIS PAGE WILL NOT BE
+          UPDATING.</small
+        ></b
+      >
+    </div>
+    <div class="newsInfo container">
+      To receive the Daily News Alert, contact
+      <a class="link" href="./">Malcolm Hallam</a> to sign up. For the 30 day
+      archive:
+      <a class="link" href="./">goto/dticdailynews</a>
+    </div>
+    <div class="space"></div>
+
+    <div class="container">
+      <button class="btn tab-btn active" data-tab="articles">
+        Show all Digests
+      </button>
+      <button class="btn tab-btn" data-tab="subscribed">
+        Show my Subscription
+      </button>
+    </div>
+
+    <div class="app-container">
+      <main>
+        <div class="tab-content active" id="articles-tab">
+          <div class="search-bar">
+            <input type="text" id="search-input" placeholder="Search news..." />
+          </div>
+          <div class="cards-container" id="all-articles">
+            <!-- Cards will be dynamically added here -->
+            <div class="loading">Loading News Digits...</div>
+          </div>
+        </div>
+
+        <div class="tab-content" id="subscribed-tab">
+          <div class="cards-container" id="subscribed-articles">
+            <!-- Subscribed articles will appear here -->
+            <p class="empty-state">You haven't subscribed to any News yet.</p>
+          </div>
+        </div>
+      </main>
+
+      <!-- Modal for article details -->
+      <div class="modal" id="article-modal">
+        <div class="modal-content">
+          <span class="close-btn">&times;</span>
+          <div class="modal-header">
+            <h2 id="modal-title">Article Title</h2>
+            <p id="modal-date">Published Date</p>
+          </div>
+          <div class="modal-body">
+            <p id="modal-description">Article description will appear here.</p>
+            <div class="tags-container" id="modal-tags">
+              <!-- Tags will be added here -->
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="subscribe-btn" class="btn primary-btn">
+              Subscribe
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Store for articles data
+      let allArticles = [];
+      let subscribedArticles = [];
+
+      // DOM Elements
+      const allArticlesContainer = document.getElementById("all-articles");
+      const subscribedArticlesContainer = document.getElementById(
+        "subscribed-articles"
+      );
+      const tabButtons = document.querySelectorAll(".tab-btn");
+      const tabContents = document.querySelectorAll(".tab-content");
+      const modal = document.getElementById("article-modal");
+      const closeBtn = document.querySelector(".close-btn");
+      const searchInput = document.getElementById("search-input");
+      const subscribeBtn = document.getElementById("subscribe-btn");
+
+      // Initialize the application
+      document.addEventListener("DOMContentLoaded", () => {
+        initTabs();
+        fetchArticles();
+        initEventListeners();
+        loadSubscriptions();
+      });
+
+      // Initialize tab functionality
+      function initTabs() {
+        tabButtons.forEach((button) => {
+          button.addEventListener("click", () => {
+            const tabName = button.getAttribute("data-tab");
+
+            // Update active tab button
+            tabButtons.forEach((btn) => btn.classList.remove("active"));
+            button.classList.add("active");
+
+            // Show the selected tab content
+            tabContents.forEach((content) =>
+              content.classList.remove("active")
+            );
+            document.getElementById(`${tabName}-tab`).classList.add("active");
+          });
+        });
+      }
+
+      // Initialize event listeners
+      function initEventListeners() {
+        // Close modal when clicking the close button
+        closeBtn.addEventListener("click", closeModal);
+
+        // Close modal when clicking outside the modal content
+        window.addEventListener("click", (e) => {
+          if (e.target === modal) {
+            closeModal();
+          }
+        });
+
+        // Search functionality
+        searchInput.addEventListener("input", debounce(filterArticles, 300));
+
+        // Subscribe button in modal
+        subscribeBtn.addEventListener("click", toggleSubscription);
+      }
+
+      // Fetch articles (mock data for demonstration)
+      function fetchArticles() {
+        // Simulating API delay
+        setTimeout(() => {
+          // Mock data for demonstration
+          allArticles = [
+            {
+              id: 1,
+              title: "Introduction to Modern Web Development",
+              description:
+                "Learn the fundamentals of modern web development including HTML5, CSS3, and JavaScript ES6+.",
+              date: "2023-05-15",
+              imageUrl: "https://picsum.photos/600/400?random=1",
+              tags: ["Web Development", "HTML", "CSS", "JavaScript"],
+            },
+            {
+              id: 2,
+              title: "Responsive Design Best Practices",
+              description:
+                "Discover the best practices for creating responsive websites that work seamlessly across all devices.",
+              date: "2023-06-02",
+              imageUrl: "https://picsum.photos/600/400?random=2",
+              tags: ["Responsive Design", "CSS", "Mobile"],
+            },
+            {
+              id: 3,
+              title: "JavaScript Frameworks Comparison",
+              description:
+                "A detailed comparison of popular JavaScript frameworks including React, Vue, and Angular.",
+              date: "2023-06-18",
+              imageUrl: "https://picsum.photos/600/400?random=3",
+              tags: ["JavaScript", "React", "Vue", "Angular"],
+            },
+            {
+              id: 4,
+              title: "Getting Started with SharePoint Development",
+              description:
+                "A comprehensive guide to developing applications with SharePoint.",
+              date: "2023-07-05",
+              imageUrl: "https://picsum.photos/600/400?random=4",
+              tags: ["SharePoint", "Development", "Microsoft"],
+            },
+            {
+              id: 5,
+              title: "CSS Animation Techniques",
+              description:
+                "Learn how to create stunning animations using pure CSS and improve user experience.",
+              date: "2023-07-22",
+              imageUrl: "https://picsum.photos/600/400?random=5",
+              tags: ["CSS", "Animation", "UX"],
+            },
+            {
+              id: 6,
+              title: "Web Performance Optimization",
+              description:
+                "Techniques and strategies to optimize your web applications for better performance.",
+              date: "2023-08-10",
+              imageUrl: "https://picsum.photos/600/400?random=6",
+              tags: ["Performance", "Optimization", "Web"],
+            },
+          ];
+
+          renderArticles();
+        }, 1000);
+      }
+
+      // Render articles to the DOM
+      function renderArticles(filteredArticles = null) {
+        const articles = filteredArticles || allArticles;
+
+        // Render all articles
+        allArticlesContainer.innerHTML = "";
+
+        if (articles.length === 0) {
+          allArticlesContainer.innerHTML = `
+                    <p class="empty-state">No articles found matching your search.</p>
+                `;
+          return;
+        }
+
+        articles.forEach((article, index) => {
+          const isSubscribed = subscribedArticles.some(
+            (a) => a.id === article.id
+          );
+          const card = createArticleCard(article, isSubscribed, index);
+          allArticlesContainer.appendChild(card);
+        });
+
+        // Render subscribed articles
+        renderSubscribedArticles();
+      }
+
+      // Render subscribed articles
+      function renderSubscribedArticles() {
+        subscribedArticlesContainer.innerHTML = "";
+
+        if (subscribedArticles.length === 0) {
+          subscribedArticlesContainer.innerHTML = `
+                    <p class="empty-state">You haven't subscribed to any articles yet.</p>
+                `;
+          return;
+        }
+
+        subscribedArticles.forEach((article, index) => {
+          const card = createArticleCard(article, true, index);
+          subscribedArticlesContainer.appendChild(card);
+        });
+      }
+
+      // Create an article card element
+      function createArticleCard(article, isSubscribed, index) {
+        const card = document.createElement("div");
+        card.className = `card ${isSubscribed ? "subscribed" : ""}`;
+        card.style.animationDelay = `${0.1 * (index % 8)}s`;
+
+        const formattedDate = new Date(article.date).toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }
+        );
+
+        // card.innerHTML = `
+        //         <div class="card-img" style="background-image: url('${article.imageUrl}')"></div>
+        //         <div class="subscribed-badge">Subscribed</div>
+        //         <div class="card-content">
+        //             <h3 class="card-title">${article.title}</h3>
+        //             <p class="card-date">${formattedDate}</p>
+        //             <p class="card-description">${article.description}</p>
+        //             </div>
+        //             `;
+        // <div class="card-tags">
+        //     ${article.tags.slice(0, 3).map(tag => `<span class="tag">${tag}</span>`).join('')}
+        //     ${article.tags.length > 3 ? `<span class="tag">+${article.tags.length - 3}</span>` : ''}
+        // </div>
+
+        // Add click event to open modal
+
+         card.innerHTML =`<div class="newsCard">
+        <div class="backgroundImg">
+          <img alt="" src="${article.imageUrl}" width="100%" height="100%" />
+        </div>
+        <div class="whiteBackground"></div>
+        <div class="newsDetails">
+          <div class="newsHeading">
+            <b>${article.title}</b>
+          </div>
+          <div
+            class="newsDescribtion"
+            title="${article.description}"
+          >
+            ${article.description}
+          </div>
+          <div class="actions">
+              ${isSubscribed ? 
+              '<button class="greenButton">Subscribe</button>'
+              : 
+              '<button class="redButton">UnSubscribe</button>'
+            }  
+
+          </div>
+        </div>
+      </div>
+        `;
+        // card.addEventListener("click", () => {
+        //   openArticleModal(article, isSubscribed);
+        // });
+
+        return card;
+      }
+
+      // Open the article modal
+      function openArticleModal(article, isSubscribed) {
+        const modalTitle = document.getElementById("modal-title");
+        const modalDate = document.getElementById("modal-date");
+        const modalDescription = document.getElementById("modal-description");
+        const modalTags = document.getElementById("modal-tags");
+
+        // Set modal content
+        modalTitle.textContent = article.title;
+
+        const formattedDate = new Date(article.date).toLocaleDateString(
+          "en-US",
+          {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          }
+        );
+
+        modalDate.textContent = formattedDate;
+        modalDescription.textContent = article.description;
+
+        // Set tags
+        // modalTags.innerHTML = '';
+        // article.tags.forEach(tag => {
+        //     const tagElement = document.createElement('span');
+        //     tagElement.className = 'tag';
+        //     tagElement.textContent = tag;
+        //     modalTags.appendChild(tagElement);
+        // });
+
+        // Update subscribe button
+        subscribeBtn.textContent = isSubscribed ? "Unsubscribe" : "Subscribe";
+        subscribeBtn.className = isSubscribed
+          ? "btn primary-btn subscribed"
+          : "btn primary-btn";
+        subscribeBtn.dataset.articleId = article.id;
+
+        // Show modal
+        modal.classList.add("active");
+        document.body.style.overflow = "hidden"; // Prevent scrolling
+
+        // Add animation to modal content
+        setTimeout(() => {
+          document.querySelector(".modal-content").style.opacity = "1";
+          document.querySelector(".modal-content").style.transform =
+            "translateY(0)";
+        }, 10);
+      }
+
+      // Close the article modal
+      function closeModal() {
+        document.querySelector(".modal-content").style.opacity = "0";
+        document.querySelector(".modal-content").style.transform =
+          "translateY(20px)";
+
+        setTimeout(() => {
+          modal.classList.remove("active");
+          document.body.style.overflow = ""; // Re-enable scrolling
+        }, 300);
+      }
+
+      // Toggle article subscription
+      function toggleSubscription() {
+        const articleId = parseInt(subscribeBtn.dataset.articleId);
+        const article = allArticles.find((a) => a.id === articleId);
+
+        if (!article) return;
+
+        const isSubscribed = subscribedArticles.some((a) => a.id === articleId);
+
+        if (isSubscribed) {
+          // Unsubscribe
+          subscribedArticles = subscribedArticles.filter(
+            (a) => a.id !== articleId
+          );
+          subscribeBtn.textContent = "Subscribe";
+          subscribeBtn.classList.remove("subscribed");
+        } else {
+          // Subscribe
+          subscribedArticles.push(article);
+          subscribeBtn.textContent = "Unsubscribe";
+          subscribeBtn.classList.add("subscribed");
+        }
+
+        // Save subscriptions to local storage
+        saveSubscriptions();
+
+        // Re-render articles to update UI
+        renderArticles();
+      }
+
+      // Filter articles based on search input
+      function filterArticles() {
+        const searchTerm = searchInput.value.toLowerCase().trim();
+
+        if (!searchTerm) {
+          renderArticles();
+          return;
+        }
+
+        const filtered = allArticles.filter((article) => {
+          return (
+            article.title.toLowerCase().includes(searchTerm) ||
+            article.description.toLowerCase().includes(searchTerm) ||
+            article.tags.some((tag) => tag.toLowerCase().includes(searchTerm))
+          );
+        });
+
+        renderArticles(filtered);
+      }
+
+      // Save subscriptions to local storage
+      function saveSubscriptions() {
+        localStorage.setItem(
+          "subscribedArticles",
+          JSON.stringify(subscribedArticles)
+        );
+      }
+
+      // Load subscriptions from local storage
+      function loadSubscriptions() {
+        const saved = localStorage.getItem("subscribedArticles");
+        if (saved) {
+          subscribedArticles = JSON.parse(saved);
+        }
+      }
+
+      // Utility function for debouncing
+      function debounce(func, delay) {
+        let timeout;
+        return function () {
+          const context = this;
+          const args = arguments;
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func.apply(context, args), delay);
+        };
+      }
+
+      // Function to simulate SharePoint data fetching
+      // In a real implementation, you would replace this with actual SharePoint API calls
+      function fetchFromSharePoint() {
+        console.log(
+          "In a real implementation, this would fetch data from SharePoint"
+        );
+        // This is where you would add your SharePoint API code
+      }
+    </script>
+  </body>
+</html>
