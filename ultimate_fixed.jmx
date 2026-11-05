@@ -1,0 +1,1245 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jmeterTestPlan version="1.2" properties="5.0" jmeter="5.6.3">
+  <hashTree>
+    <TestPlan guiclass="TestPlanGui" testclass="TestPlan" testname="create-task-master">
+      <stringProp name="TestPlan.comments">This test plan was created by the BlazeMeter converter v.${project.version}. Please contact support@blazemeter.com for further support.</stringProp>
+      <elementProp name="TestPlan.user_defined_variables" elementType="Arguments" guiclass="ArgumentsPanel" testclass="Arguments">
+        <collectionProp name="Arguments.arguments"/>
+      </elementProp>
+      <boolProp name="TestPlan.functional_mode">false</boolProp>
+      <boolProp name="TestPlan.serialize_threadgroups">false</boolProp>
+    </TestPlan>
+    <hashTree>
+      <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager">
+        <collectionProp name="HeaderManager.headers">
+          <elementProp name="sec-ch-ua" elementType="Header">
+            <stringProp name="Header.name">sec-ch-ua</stringProp>
+            <stringProp name="Header.value">&quot;Google Chrome&quot;;v=&quot;155&quot;, &quot;Chromium&quot;;v=&quot;155&quot;, &quot;Not(A:Brand&quot;;v=&quot;24&quot;</stringProp>
+          </elementProp>
+          <elementProp name="sec-ch-ua-mobile" elementType="Header">
+            <stringProp name="Header.name">sec-ch-ua-mobile</stringProp>
+            <stringProp name="Header.value">?0</stringProp>
+          </elementProp>
+          <elementProp name="Accept" elementType="Header">
+            <stringProp name="Header.name">Accept</stringProp>
+            <stringProp name="Header.value">*/*</stringProp>
+          </elementProp>
+          <elementProp name="sec-ch-ua-platform" elementType="Header">
+            <stringProp name="Header.name">sec-ch-ua-platform</stringProp>
+            <stringProp name="Header.value">&quot;Windows&quot;</stringProp>
+          </elementProp>
+          <elementProp name="User-Agent" elementType="Header">
+            <stringProp name="Header.name">User-Agent</stringProp>
+            <stringProp name="Header.value">Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/155.0.0.0 Safari/537.36</stringProp>
+          </elementProp>
+          <elementProp name="Content-Type" elementType="Header">
+            <stringProp name="Header.name">Content-Type</stringProp>
+            <stringProp name="Header.value">application/json</stringProp>
+          </elementProp>
+        </collectionProp>
+      </HeaderManager>
+      <hashTree/>
+      <Arguments guiclass="ArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
+        <collectionProp name="Arguments.arguments">
+          <elementProp name="BASE_URL_1" elementType="Argument">
+            <stringProp name="Argument.name">BASE_URL_1</stringProp>
+            <stringProp name="Argument.value">emta-uat.quest-global.com</stringProp>
+            <stringProp name="Argument.metadata">=</stringProp>
+          </elementProp>
+        </collectionProp>
+      </Arguments>
+      <hashTree/>
+      <ConfigTestElement guiclass="HttpDefaultsGui" testclass="ConfigTestElement" testname="HTTP Request Defaults" enabled="true">
+        <boolProp name="HTTPSampler.image_parser">true</boolProp>
+        <boolProp name="HTTPSampler.concurrentDwn">true</boolProp>
+        <intProp name="HTTPSampler.concurrentPool">6</intProp>
+        <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables">
+          <collectionProp name="Arguments.arguments"/>
+        </elementProp>
+        <stringProp name="HTTPSampler.implementation"></stringProp>
+      </ConfigTestElement>
+      <hashTree/>
+      <DNSCacheManager guiclass="DNSCachePanel" testclass="DNSCacheManager" testname="DNS Cache Manager" enabled="true">
+        <collectionProp name="DNSCacheManager.servers"/>
+        <collectionProp name="DNSCacheManager.hosts"/>
+        <boolProp name="DNSCacheManager.clearEachIteration">true</boolProp>
+        <boolProp name="DNSCacheManager.isCustomResolver">false</boolProp>
+      </DNSCacheManager>
+      <hashTree/>
+      <AuthManager guiclass="AuthPanel" testclass="AuthManager" testname="HTTP Authorization Manager" enabled="true">
+        <collectionProp name="AuthManager.auth_list"/>
+        <boolProp name="AuthManager.controlledByThreadGroup">false</boolProp>
+      </AuthManager>
+      <hashTree/>
+      <CookieManager guiclass="CookiePanel" testclass="CookieManager" testname="HTTP Cookie Manager" enabled="true">
+        <collectionProp name="CookieManager.cookies"/>
+        <boolProp name="CookieManager.clearEachIteration">true</boolProp>
+        <boolProp name="CookieManager.controlledByThreadGroup">false</boolProp>
+      </CookieManager>
+      <hashTree/>
+      <CacheManager guiclass="CacheManagerGui" testclass="CacheManager" testname="HTTP Cache Manager" enabled="true">
+        <boolProp name="clearEachIteration">true</boolProp>
+        <boolProp name="useExpires">false</boolProp>
+        <boolProp name="CacheManager.controlledByThread">false</boolProp>
+      </CacheManager>
+      <hashTree/>
+      <ThreadGroup guiclass="ThreadGroupGui" testclass="ThreadGroup" testname="Thread Group">
+        <intProp name="ThreadGroup.num_threads">1</intProp>
+        <intProp name="ThreadGroup.ramp_time">1</intProp>
+        <boolProp name="ThreadGroup.same_user_on_next_iteration">true</boolProp>
+        <stringProp name="ThreadGroup.on_sample_error">continue</stringProp>
+        <elementProp name="ThreadGroup.main_controller" elementType="LoopController" guiclass="LoopControlPanel" testclass="LoopController" testname="Loop Controller">
+          <stringProp name="LoopController.loops">1</stringProp>
+          <boolProp name="LoopController.continue_forever">false</boolProp>
+        </elementProp>
+      </ThreadGroup>
+      <hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="employee-login">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//v1/auth/login</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+&quot;email&quot;:&quot;${email}&quot;,&#xd;
+&quot;password&quot;:&quot;${password}&quot;&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">60000 </stringProp>
+            <stringProp name="RandomTimer.range">60000 </stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <JSONPostProcessor guiclass="JSONPostProcessorGui" testclass="JSONPostProcessor" testname="JSON Extractor" enabled="true">
+            <stringProp name="JSONPostProcessor.referenceNames">access_token</stringProp>
+            <stringProp name="JSONPostProcessor.jsonPathExprs">$.access_token</stringProp>
+            <stringProp name="JSONPostProcessor.match_numbers">1</stringProp>
+            <stringProp name="JSONPostProcessor.defaultValues">Not_Found</stringProp>
+          </JSONPostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="creating-task-1">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&#xd;
+{&#xd;
+    &quot;tasks&quot;: [{&#xd;
+        &quot;id&quot;: null,&#xd;
+        &quot;task_name&quot;: &quot;&quot;,&#xd;
+        &quot;description&quot;: &quot;&quot;,&#xd;
+        &quot;comments&quot;: &quot;&quot;,&#xd;
+        &quot;task_status&quot;: &quot;SAVED&quot;,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg1},&#xd;
+        &quot;business_unit_id&quot;: ${bu1},&#xd;
+        &quot;workflow_id&quot;: ${wf1},&#xd;
+        &quot;task_id&quot;: null,&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;date_logged&quot;: &quot;2026-11-01&quot;,&#xd;
+        &quot;hours_logged&quot;: 0,&#xd;
+        &quot;approver_id&quot;: 861,&#xd;
+        &quot;is_overtime&quot;: false,&#xd;
+        &quot;overtime_hours&quot;: 0,&#xd;
+        &quot;role_name&quot;: &quot;ENGINEER&quot;&#xd;
+    }],&#xd;
+    &quot;monthly_comments&quot;: [{&#xd;
+        &quot;bu_id&quot;: ${bu1},&#xd;
+        &quot;wf_id&quot;: ${wf1},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg1},&#xd;
+        &quot;monthly_comment&quot;: &quot;&quot;&#xd;
+    }]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">60000</stringProp>
+            <stringProp name="RandomTimer.range">120000</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getting-tasks-deatils">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/tasks</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;employee_id&quot;:${employee_id},&quot;from_date&quot;:&quot;2026-11-01&quot;,&quot;to_date&quot;:&quot;2026-11-30&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">5000</stringProp>
+            <stringProp name="RandomTimer.range">5000</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.time.*
+
+def bu = vars.get(&quot;bu1&quot;)?.trim()
+def wf = vars.get(&quot;wf1&quot;)?.trim()
+def tg = vars.get(&quot;tg1&quot;)?.trim()
+
+def resp = new JsonSlurper().parseText(prev.getResponseDataAsString())
+def ts   = resp.timesheet_details
+def allRows = ts?.task_details
+
+if (allRows == null) {
+    log.error(&quot;HTTP &quot; + prev.getResponseCode() + &quot;: no task_details.&quot;)
+    return
+}
+
+// one row per taskline (avoids duplicates)
+def rows = allRows.unique(false) { it.monthly_comments.taskline_id }
+def task1Row = rows.find { r -&gt; r.business_unit.id.toString() == bu &amp;&amp; r.workflow.id.toString() == wf &amp;&amp; r.timesheet_group.id.toString() == tg }
+if (task1Row == null) {
+    task1Row = rows.find { r -&gt; r.business_unit.id.toString() == bu &amp;&amp; r.workflow.id.toString() == wf }
+}
+if (task1Row == null) {
+    task1Row = rows ? rows[0] : null
+}
+if (task1Row == null) {
+    log.error(&quot;No valid task rows available for Task 1.&quot;)
+    return
+}
+
+def holidayList = resp.holidays ?: new ArrayList()
+def holidays = holidayList.collect { it.holiday_date } as Set
+
+def start = LocalDate.parse(task1Row.tasks[0].date_logged)
+def endStr = vars.get(&quot;periodEnd&quot;)
+def end = endStr ? LocalDate.parse(endStr) : start.withDayOfMonth(start.lengthOfMonth())
+
+def tasks = new ArrayList()
+for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
+    boolean workDay = d.dayOfWeek.value &lt;= 5 &amp;&amp; !holidays.contains(d.toString())
+
+    // First week: days 2 to 7 (Mon-Fri only)
+    int hoursToLog = (workDay &amp;&amp; d.getDayOfMonth() &gt;= 2 &amp;&amp; d.getDayOfMonth() &lt;= 7) ? 9 : 0
+
+    def existing = task1Row.tasks.find { it.date_logged == d.toString() }
+
+    if (hoursToLog &gt; 0 || existing?.id != null) {
+        tasks.add([
+            id                : existing?.id,
+            task_name         : &quot;&quot;,
+            description       : &quot;&quot;,
+            comments          : &quot;&quot;,
+            task_status       : &quot;SAVED&quot;,
+            timesheet_id      : ts.timesheet_id,
+            timesheet_group_id: task1Row.timesheet_group.id,
+            business_unit_id  : task1Row.business_unit.id,
+            workflow_id       : task1Row.workflow.id,
+            taskline_id       : task1Row.monthly_comments.taskline_id,
+            task_id           : existing?.id,
+            date_logged       : d.toString(),
+            hours_logged      : hoursToLog,
+            approver_id       : task1Row.approver.id,
+            is_overtime       : false,
+            role_name         : &quot;&quot;,
+            overtime_hours    : 0
+        ])
+    }
+}
+
+def monthly = [[
+    bu_id             : task1Row.business_unit.id,
+    wf_id             : task1Row.workflow.id,
+    taskline_id       : task1Row.monthly_comments.taskline_id,
+    timesheet_group_id: task1Row.timesheet_group.id,
+    monthly_comment   : &quot;&quot;
+]]
+
+vars.put(&quot;savePayload_1&quot;, JsonOutput.toJson([tasks: tasks, monthly_comments: monthly]))
+log.info(&quot;savePayload built for Task 1: &quot; + tasks.size() + &quot; entries.&quot;)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="saving-task-1">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${savePayload_1}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="creating-task-2">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">&#xd;
+{&#xd;
+    &quot;tasks&quot;: [{&#xd;
+        &quot;id&quot;: null,&#xd;
+        &quot;task_name&quot;: &quot;&quot;,&#xd;
+        &quot;description&quot;: &quot;&quot;,&#xd;
+        &quot;comments&quot;: &quot;&quot;,&#xd;
+        &quot;task_status&quot;: &quot;SAVED&quot;,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg2},&#xd;
+        &quot;business_unit_id&quot;: ${bu2},&#xd;
+        &quot;workflow_id&quot;: ${wf2},&#xd;
+        &quot;task_id&quot;: null,&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;date_logged&quot;: &quot;2026-11-01&quot;,&#xd;
+        &quot;hours_logged&quot;: 0,&#xd;
+        &quot;approver_id&quot;: 861,&#xd;
+        &quot;is_overtime&quot;: false,&#xd;
+        &quot;overtime_hours&quot;: 0,&#xd;
+        &quot;role_name&quot;: &quot;ENGINEER&quot;&#xd;
+    }],&#xd;
+    &quot;monthly_comments&quot;: [{&#xd;
+        &quot;bu_id&quot;: ${bu2},&#xd;
+        &quot;wf_id&quot;: ${wf2},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg2},&#xd;
+        &quot;monthly_comment&quot;: &quot;&quot;&#xd;
+    }]&#xd;
+}&#xd;
+</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">60000 </stringProp>
+            <stringProp name="RandomTimer.range">0000 </stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getting-tasks-deatils">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/tasks</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;employee_id&quot;:${employee_id},&quot;from_date&quot;:&quot;2026-11-01&quot;,&quot;to_date&quot;:&quot;2026-11-30&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">5000</stringProp>
+            <stringProp name="RandomTimer.range">5000</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.time.*
+
+def bu = vars.get(&quot;bu2&quot;)?.trim()
+def wf = vars.get(&quot;wf2&quot;)?.trim()
+
+def resp = new JsonSlurper().parseText(prev.getResponseDataAsString())
+def ts   = resp.timesheet_details
+def allRows = ts?.task_details
+
+if (allRows == null) {
+    log.error(&quot;HTTP &quot; + prev.getResponseCode() + &quot;: no task_details.&quot;)
+    return
+}
+
+def rows = allRows.unique(false) { it.monthly_comments.taskline_id }
+def task2Row = rows.find { r -&gt; r.business_unit.id.toString() == bu &amp;&amp; r.workflow.id.toString() == wf }
+if (task2Row == null) {
+    task2Row = rows ? rows[0] : null
+}
+
+if (task2Row == null) {
+    log.error(&quot;No valid task rows available for Task 2.&quot;)
+    return
+}
+
+vars.put(&quot;usedTasklines&quot;, task2Row.monthly_comments.taskline_id.toString())
+def holidayList = resp.holidays ?: new ArrayList()
+def holidays = holidayList.collect { it.holiday_date } as Set
+
+def start = LocalDate.parse(task2Row.tasks[0].date_logged)
+def endStr = vars.get(&quot;periodEnd&quot;)
+def end = endStr ? LocalDate.parse(endStr) : start.withDayOfMonth(start.lengthOfMonth())
+
+def tasks = new ArrayList()
+for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
+    boolean workDay = d.dayOfWeek.value &lt;= 5 &amp;&amp; !holidays.contains(d.toString())
+    
+    // Explicitly target the second week of the month (Days 8 to 14)
+    int hoursToLog = (workDay &amp;&amp; d.getDayOfMonth() &gt;= 8 &amp;&amp; d.getDayOfMonth() &lt;= 14) ? 9 : 0
+    
+    def existing = task2Row.tasks.find { it.date_logged == d.toString() }
+    
+    if (hoursToLog &gt; 0 || existing?.id != null) {
+        tasks.add([
+            id                : existing?.id,
+            task_name         : &quot;&quot;,
+            description       : &quot;&quot;,
+            comments          : &quot;&quot;,
+            task_status       : &quot;SAVED&quot;,
+            timesheet_id      : ts.timesheet_id,
+            timesheet_group_id: task2Row.timesheet_group.id,
+            business_unit_id  : task2Row.business_unit.id,
+            workflow_id       : task2Row.workflow.id,
+            taskline_id       : task2Row.monthly_comments.taskline_id,
+            task_id           : existing?.id,
+            date_logged       : d.toString(),
+            hours_logged      : hoursToLog,
+            approver_id       : task2Row.approver.id,
+            is_overtime       : false,
+            role_name         : &quot;&quot;,
+            overtime_hours    : 0
+        ])
+    }
+}
+
+def monthly = [[
+    bu_id             : task2Row.business_unit.id,
+    wf_id             : task2Row.workflow.id,
+    taskline_id       : task2Row.monthly_comments.taskline_id,
+    timesheet_group_id: task2Row.timesheet_group.id,
+    monthly_comment   : &quot;&quot;
+]]
+
+vars.put(&quot;savePayload_2&quot;, JsonOutput.toJson([tasks: tasks, monthly_comments: monthly]))
+log.info(&quot;savePayload built for Task 2: &quot; + tasks.size() + &quot; entries.&quot;)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="saving-task-2">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${savePayload_2}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="creating-task-3">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;tasks&quot;: [{&#xd;
+        &quot;id&quot;: null,&#xd;
+        &quot;task_name&quot;: &quot;&quot;,&#xd;
+        &quot;description&quot;: &quot;&quot;,&#xd;
+        &quot;comments&quot;: &quot;&quot;,&#xd;
+        &quot;task_status&quot;: &quot;SAVED&quot;,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg3},&#xd;
+        &quot;business_unit_id&quot;: ${bu3},&#xd;
+        &quot;workflow_id&quot;: ${wf3},&#xd;
+        &quot;task_id&quot;: null,&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;date_logged&quot;: &quot;2026-11-01&quot;,&#xd;
+        &quot;hours_logged&quot;: 0,&#xd;
+        &quot;approver_id&quot;: 861,&#xd;
+        &quot;is_overtime&quot;: false,&#xd;
+        &quot;overtime_hours&quot;: 0,&#xd;
+        &quot;role_name&quot;: &quot;ENGINEER&quot;&#xd;
+    }],&#xd;
+    &quot;monthly_comments&quot;: [{&#xd;
+        &quot;bu_id&quot;: ${bu3},&#xd;
+        &quot;wf_id&quot;: ${wf3},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg3},&#xd;
+        &quot;monthly_comment&quot;: &quot;&quot;&#xd;
+    }]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">120000</stringProp>
+            <stringProp name="RandomTimer.range">180000</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getting-tasks-deatils">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/tasks</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;employee_id&quot;:${employee_id},&quot;from_date&quot;:&quot;2026-11-01&quot;,&quot;to_date&quot;:&quot;2026-11-30&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">5000</stringProp>
+            <stringProp name="RandomTimer.range">5000</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.time.*
+
+def bu = vars.get(&quot;bu3&quot;)?.trim()
+def wf = vars.get(&quot;wf3&quot;)?.trim()
+
+def resp = new JsonSlurper().parseText(prev.getResponseDataAsString())
+def ts   = resp.timesheet_details
+def allRows = ts?.task_details
+
+if (allRows == null) {
+    log.error(&quot;HTTP &quot; + prev.getResponseCode() + &quot;: no task_details.&quot;)
+    return
+}
+
+def rows = allRows.unique(false) { it.monthly_comments.taskline_id }
+def task3Row = rows.find { r -&gt; r.business_unit.id.toString() == bu &amp;&amp; r.workflow.id.toString() == wf }
+if (task3Row == null) {
+    task3Row = rows ? rows[0] : null
+}
+
+if (task3Row == null) {
+    log.error(&quot;No valid task rows available for Task 3.&quot;)
+    return
+}
+
+vars.put(&quot;usedTasklines&quot;, task3Row.monthly_comments.taskline_id.toString())
+def holidayList = resp.holidays ?: new ArrayList()
+def holidays = holidayList.collect { it.holiday_date } as Set
+
+def start = LocalDate.parse(task3Row.tasks[0].date_logged)
+def endStr = vars.get(&quot;periodEnd&quot;)
+def end = endStr ? LocalDate.parse(endStr) : start.withDayOfMonth(start.lengthOfMonth())
+
+def tasks = new ArrayList()
+for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
+    boolean workDay = d.dayOfWeek.value &lt;= 5 &amp;&amp; !holidays.contains(d.toString())
+    
+    // Explicitly target the third week of the month (Days 15 to 21)
+    int hoursToLog = (workDay &amp;&amp; d.getDayOfMonth() &gt;= 15 &amp;&amp; d.getDayOfMonth() &lt;= 21) ? 9 : 0
+    
+    def existing = task3Row.tasks.find { it.date_logged == d.toString() }
+    
+    if (hoursToLog &gt; 0 || existing?.id != null) {
+        tasks.add([
+            id                : existing?.id,
+            task_name         : &quot;&quot;,
+            description       : &quot;&quot;,
+            comments          : &quot;&quot;,
+            task_status       : &quot;SAVED&quot;,
+            timesheet_id      : ts.timesheet_id,
+            timesheet_group_id: task3Row.timesheet_group.id,
+            business_unit_id  : task3Row.business_unit.id,
+            workflow_id       : task3Row.workflow.id,
+            taskline_id       : task3Row.monthly_comments.taskline_id,
+            task_id           : existing?.id,
+            date_logged       : d.toString(),
+            hours_logged      : hoursToLog,
+            approver_id       : task3Row.approver.id,
+            is_overtime       : false,
+            role_name         : &quot;&quot;,
+            overtime_hours    : 0
+        ])
+    }
+}
+
+def monthly = [[
+    bu_id             : task3Row.business_unit.id,
+    wf_id             : task3Row.workflow.id,
+    taskline_id       : task3Row.monthly_comments.taskline_id,
+    timesheet_group_id: task3Row.timesheet_group.id,
+    monthly_comment   : &quot;&quot;
+]]
+
+vars.put(&quot;savePayload_3&quot;, JsonOutput.toJson([tasks: tasks, monthly_comments: monthly]))
+log.info(&quot;savePayload built for Task 3: &quot; + tasks.size() + &quot; entries.&quot;)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="saving-task-3">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${savePayload_3}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="creating-task-4">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&#xd;
+    &quot;tasks&quot;: [{&#xd;
+        &quot;id&quot;: null,&#xd;
+        &quot;task_name&quot;: &quot;&quot;,&#xd;
+        &quot;description&quot;: &quot;&quot;,&#xd;
+        &quot;comments&quot;: &quot;&quot;,&#xd;
+        &quot;task_status&quot;: &quot;SAVED&quot;,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg4},&#xd;
+        &quot;business_unit_id&quot;: ${bu4},&#xd;
+        &quot;workflow_id&quot;: ${wf4},&#xd;
+        &quot;task_id&quot;: null,&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;date_logged&quot;: &quot;2026-11-01&quot;,&#xd;
+        &quot;hours_logged&quot;: 0,&#xd;
+        &quot;approver_id&quot;: 861,&#xd;
+        &quot;is_overtime&quot;: false,&#xd;
+        &quot;overtime_hours&quot;: 0,&#xd;
+        &quot;role_name&quot;: &quot;ENGINEER&quot;&#xd;
+    }],&#xd;
+    &quot;monthly_comments&quot;: [{&#xd;
+        &quot;bu_id&quot;: ${bu4},&#xd;
+        &quot;wf_id&quot;: ${wf4},&#xd;
+        &quot;timesheet_id&quot;: null,&#xd;
+        &quot;employee_id&quot;: ${employee_id},&#xd;
+        &quot;taskline_id&quot;: null,&#xd;
+        &quot;timesheet_group_id&quot;: ${tg4},&#xd;
+        &quot;monthly_comment&quot;: &quot;&quot;&#xd;
+    }]&#xd;
+}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">120000</stringProp>
+            <stringProp name="RandomTimer.range">120000</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="getting-tasks-deatils">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/tasks</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;employee_id&quot;:${employee_id},&quot;from_date&quot;:&quot;2026-11-01&quot;,&quot;to_date&quot;:&quot;2026-11-30&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <UniformRandomTimer guiclass="UniformRandomTimerGui" testclass="UniformRandomTimer" testname="Uniform Random Timer" enabled="false">
+            <stringProp name="ConstantTimer.delay">5000</stringProp>
+            <stringProp name="RandomTimer.range">5000</stringProp>
+          </UniformRandomTimer>
+          <hashTree/>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+import java.time.*
+
+def bu = vars.get(&quot;bu4&quot;)?.trim()
+def wf = vars.get(&quot;wf4&quot;)?.trim()
+
+def resp = new JsonSlurper().parseText(prev.getResponseDataAsString())
+def ts   = resp.timesheet_details
+def allRows = ts?.task_details
+
+if (allRows == null) {
+    log.error(&quot;HTTP &quot; + prev.getResponseCode() + &quot;: no task_details.&quot;)
+    return
+}
+
+def rows = allRows.unique(false) { it.monthly_comments.taskline_id }
+def task4Row = rows.find { r -&gt; r.business_unit.id.toString() == bu &amp;&amp; r.workflow.id.toString() == wf }
+if (task4Row == null) {
+    task4Row = rows ? rows[0] : null
+}
+
+if (task4Row == null) {
+    log.error(&quot;No valid task rows available for Task 4.&quot;)
+    return
+}
+
+vars.put(&quot;usedTasklines&quot;, task4Row.monthly_comments.taskline_id.toString())
+def holidayList = resp.holidays ?: new ArrayList()
+def holidays = holidayList.collect { it.holiday_date } as Set
+
+def start = LocalDate.parse(task4Row.tasks[0].date_logged)
+def endStr = vars.get(&quot;periodEnd&quot;)
+def end = endStr ? LocalDate.parse(endStr) : start.withDayOfMonth(start.lengthOfMonth())
+
+def tasks = new ArrayList()
+for (LocalDate d = start; !d.isAfter(end); d = d.plusDays(1)) {
+    boolean workDay = d.dayOfWeek.value &lt;= 5 &amp;&amp; !holidays.contains(d.toString())
+    
+    // Explicitly target from day 22 through the end of the month
+    int hoursToLog = (workDay &amp;&amp; d.getDayOfMonth() &gt;= 22) ? 9 : 0
+    
+    def existing = task4Row.tasks.find { it.date_logged == d.toString() }
+    
+    if (hoursToLog &gt; 0 || existing?.id != null) {
+        tasks.add([
+            id                : existing?.id,
+            task_name         : &quot;&quot;,
+            description       : &quot;&quot;,
+            comments          : &quot;&quot;,
+            task_status       : &quot;SAVED&quot;,
+            timesheet_id      : ts.timesheet_id,
+            timesheet_group_id: task4Row.timesheet_group.id,
+            business_unit_id  : task4Row.business_unit.id,
+            workflow_id       : task4Row.workflow.id,
+            taskline_id       : task4Row.monthly_comments.taskline_id,
+            task_id           : existing?.id,
+            date_logged       : d.toString(),
+            hours_logged      : hoursToLog,
+            approver_id       : task4Row.approver.id,
+            is_overtime       : false,
+            role_name         : &quot;&quot;,
+            overtime_hours    : 0
+        ])
+    }
+}
+
+def monthly = [[
+    bu_id             : task4Row.business_unit.id,
+    wf_id             : task4Row.workflow.id,
+    taskline_id       : task4Row.monthly_comments.taskline_id,
+    timesheet_group_id: task4Row.timesheet_group.id,
+    monthly_comment   : &quot;&quot;
+]]
+
+vars.put(&quot;savePayload_4&quot;, JsonOutput.toJson([tasks: tasks, monthly_comments: monthly]))
+log.info(&quot;savePayload built for Task 4: &quot; + tasks.size() + &quot; entries.&quot;)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="saving-task-4">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${savePayload_4}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="all-tasks-details">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/tasks</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">{&quot;employee_id&quot;:${employee_id},&quot;from_date&quot;:&quot;2026-11-01&quot;,&quot;to_date&quot;:&quot;2026-11-30&quot;}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+          <JSR223PostProcessor guiclass="TestBeanGUI" testclass="JSR223PostProcessor" testname="JSR223 PostProcessor">
+            <stringProp name="cacheKey">true</stringProp>
+            <stringProp name="filename"></stringProp>
+            <stringProp name="parameters"></stringProp>
+            <stringProp name="script">import groovy.json.JsonSlurper
+import groovy.json.JsonOutput
+
+// 1. Fetch Employee ID dynamically from your CSV dataset configuration variable
+def csvEmpId = vars.get(&quot;employee_id&quot;)?.trim()
+
+if (csvEmpId == null || csvEmpId.isEmpty()) {
+    log.error(&quot;CSV VARIABLE MISSING: &apos;employee_id&apos; could not be retrieved from the CSV config dataset.&quot;)
+    return
+}
+
+def responseData = prev.getResponseDataAsString()
+def resp = new JsonSlurper().parseText(responseData)
+def ts = resp.timesheet_details
+def allRows = ts?.task_details
+
+if (allRows == null) {
+    log.error(&quot;HTTP &quot; + prev.getResponseCode() + &quot;: No task_details found in payload.&quot;)
+    return
+}
+
+def tasksToSubmit = new ArrayList()
+
+// 2. Loop through all sections and collect every single available task ID from this fresh view
+allRows.each { row -&gt;
+    if (row.tasks) {
+        row.tasks.each { task -&gt;
+            if (task.id != null) {
+                tasksToSubmit.add([
+                    &quot;task_id&quot;: task.id.toInteger()
+                ])
+            }
+        }
+    }
+}
+
+if (tasksToSubmit.isEmpty()) {
+    log.error(&quot;Failed to compile payload: No task IDs were found in the current response data.&quot;)
+    return
+}
+
+def employeeId = csvEmpId.toInteger()
+
+// 3. Construct the clean JSON payload format matching your exact UI verification layout
+def finalSubmitPayload = [
+    &quot;tasks&quot;       : tasksToSubmit,
+    &quot;updated_by&quot;  : employeeId,
+    &quot;submitted_by&quot;: employeeId
+]
+
+vars.put(&quot;submitPayload&quot;, JsonOutput.toJson(finalSubmitPayload))
+log.info(&quot;Successfully compiled strict submitPayload with &quot; + tasksToSubmit.size() + &quot; entries for Employee: &quot; + employeeId)
+</stringProp>
+            <stringProp name="scriptLanguage">groovy</stringProp>
+          </JSR223PostProcessor>
+          <hashTree/>
+        </hashTree>
+        <HTTPSamplerProxy guiclass="HttpTestSampleGui" testclass="HTTPSamplerProxy" testname="submit-task">
+          <stringProp name="HTTPSampler.domain">${BASE_URL_1}</stringProp>
+          <stringProp name="HTTPSampler.port">0</stringProp>
+          <stringProp name="HTTPSampler.protocol">https</stringProp>
+          <stringProp name="HTTPSampler.path">api//employee-service/create-task-approval</stringProp>
+          <boolProp name="HTTPSampler.follow_redirects">true</boolProp>
+          <stringProp name="HTTPSampler.method">POST</stringProp>
+          <boolProp name="HTTPSampler.use_keepalive">true</boolProp>
+          <boolProp name="HTTPSampler.postBodyRaw">true</boolProp>
+          <elementProp name="HTTPsampler.Arguments" elementType="Arguments">
+            <collectionProp name="Arguments.arguments">
+              <elementProp name="" elementType="HTTPArgument">
+                <boolProp name="HTTPArgument.always_encode">false</boolProp>
+                <stringProp name="Argument.value">${submitPayload}</stringProp>
+                <stringProp name="Argument.metadata">=</stringProp>
+              </elementProp>
+            </collectionProp>
+          </elementProp>
+        </HTTPSamplerProxy>
+        <hashTree>
+          <HeaderManager guiclass="HeaderPanel" testclass="HeaderManager" testname="HTTP Header manager" enabled="true">
+            <collectionProp name="HeaderManager.headers">
+              <elementProp name="Authorization" elementType="Header">
+                <stringProp name="Header.name">Authorization</stringProp>
+                <stringProp name="Header.value">Bearer ${access_token}</stringProp>
+              </elementProp>
+            </collectionProp>
+          </HeaderManager>
+          <hashTree/>
+        </hashTree>
+        <CSVDataSet guiclass="TestBeanGUI" testclass="CSVDataSet" testname="CSV Data Set Config">
+          <stringProp name="delimiter">,</stringProp>
+          <stringProp name="fileEncoding">UTF-8</stringProp>
+          <stringProp name="filename">C:/Apps/apache-jmeter-5.6.3/test/assignments_wide.csv</stringProp>
+          <boolProp name="ignoreFirstLine">true</boolProp>
+          <boolProp name="quotedData">false</boolProp>
+          <boolProp name="recycle">false</boolProp>
+          <stringProp name="shareMode">shareMode.all</stringProp>
+          <boolProp name="stopThread">true</boolProp>
+          <stringProp name="variableNames">employee_id,email,password,bu1,wf1,tg1,bu2,wf2,tg2,bu3,wf3,tg3,bu4,wf4,tg4</stringProp>
+        </CSVDataSet>
+        <hashTree/>
+        <ResultCollector guiclass="ViewResultsFullVisualizer" testclass="ResultCollector" testname="View Results Tree">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename">results.jtl</stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatVisualizer" testclass="ResultCollector" testname="Aggregate Report" enabled="false">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+        <ResultCollector guiclass="StatGraphVisualizer" testclass="ResultCollector" testname="Aggregate Graph" enabled="false">
+          <boolProp name="ResultCollector.error_logging">false</boolProp>
+          <objProp>
+            <name>saveConfig</name>
+            <value class="SampleSaveConfiguration">
+              <time>true</time>
+              <latency>true</latency>
+              <timestamp>true</timestamp>
+              <success>true</success>
+              <label>true</label>
+              <code>true</code>
+              <message>true</message>
+              <threadName>true</threadName>
+              <dataType>true</dataType>
+              <encoding>false</encoding>
+              <assertions>true</assertions>
+              <subresults>true</subresults>
+              <responseData>false</responseData>
+              <samplerData>false</samplerData>
+              <xml>false</xml>
+              <fieldNames>true</fieldNames>
+              <responseHeaders>false</responseHeaders>
+              <requestHeaders>false</requestHeaders>
+              <responseDataOnError>false</responseDataOnError>
+              <saveAssertionResultsFailureMessage>true</saveAssertionResultsFailureMessage>
+              <assertionsResultsToSave>0</assertionsResultsToSave>
+              <bytes>true</bytes>
+              <sentBytes>true</sentBytes>
+              <url>true</url>
+              <threadCounts>true</threadCounts>
+              <idleTime>true</idleTime>
+              <connectTime>true</connectTime>
+            </value>
+          </objProp>
+          <stringProp name="filename"></stringProp>
+        </ResultCollector>
+        <hashTree/>
+      </hashTree>
+    </hashTree>
+  </hashTree>
+</jmeterTestPlan>
